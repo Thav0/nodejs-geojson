@@ -4,13 +4,13 @@
 
 # What I've learned
 
-- In this project I've learned more abaou async/await
 - How to use GeoJson and Mapbox
 - NodeJs folders organization
-- MongoDB cloud connect
+- MongoDB cloud connection
 - Mongoose Middleware with GeoJson
 - MVC with NodeJS
 - Destructuring assignment
+- Async/Await
 
 
 ## Quick Start
