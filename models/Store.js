@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const geocoder = require('../utils/geocoder');
 
 const StoreSchema = new mongoose.Schema({
   storeId: {
     type: String,
     required: [true, 'Please add a store ID'],
-    unique: true,
+    unique: [true, 'This Store ID is already in use'],
     trim: true,
     maxlength: [10, 'StoreID must be less than 10 chars']
   },
@@ -18,7 +19,7 @@ const StoreSchema = new mongoose.Schema({
       enum: ['Point'], // 'location.type' must be 'Point'
     },
     coordinates: {
-      type: [Array],
+      type: [Number],
       index: '2dsphere',
     },
     formattedAddres: String
@@ -29,4 +30,19 @@ const StoreSchema = new mongoose.Schema({
   }
 });
 
-modules.exports = mongoose.model('Store', StoreSchema);
+// Geocode & create location
+
+StoreSchema.pre('save', async function( next ) {
+  const loc = await geocoder.geocode(this.address);
+  this.location = {
+    type: 'Point',
+    coordinates: [loc[0].longitude , loc[0].latitude],
+    formattedAddres: loc[0].formattedAddress
+  }
+
+  // Do not save address
+  this.address = undefined;
+  next();
+});
+
+module.exports = mongoose.model('Store', StoreSchema);
