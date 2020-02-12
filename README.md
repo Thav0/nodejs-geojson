@@ -3,13 +3,14 @@
 > Node/Express/Mongo API with GeoJSON location field for store locations. Simple vanilla JS frontend using the Mapbox Library
 
 **What I've learned**
-. In this project I've learned more abaou async/await
-. How to use GeoJson and Mapbox
-. NodeJs folders organization
-. MongoDB cloud connect
-. Mongoose Middleware with GeoJson
-. MVC with NodeJS
-. Destructuring assignment
+
+- In this project I've learned more abaou async/await
+- How to use GeoJson and Mapbox
+- NodeJs folders organization
+- MongoDB cloud connect
+- Mongoose Middleware with GeoJson
+- MVC with NodeJS
+- Destructuring assignment
 
 
 ## Quick Start
