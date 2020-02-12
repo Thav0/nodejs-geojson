@@ -13,19 +13,15 @@ async function getStores() {
 
   const stores  = data.data.map(store => {
     return {
-      'features': [
-        {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Point',
-            'coordinates': [store.location.coordinates[0], store.location.coordinates[1]]
-          },
-          properties: {
-            storeId: store.storeId,
-            icon: 'shop'
-          }
-        }
-      ]
+      'type': 'Feature',
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [store.location.coordinates[0], store.location.coordinates[1]]
+      },
+      properties: {
+        storeId: store.storeId,
+        icon: 'shop'
+      }
     }
   });
 
@@ -34,25 +30,13 @@ async function getStores() {
 
 // Load Map with stores
 function loadMap(stores) {
+  console.log(stores);
   map.on('load', function() {
     map.addSource('point', {
       'type': 'geojson',
       'data': {
           'type': 'FeatureCollection',
-          // 'features': stores,
-          'features': [
-              {
-              'type': 'Feature',
-              'geometry': {
-                  'type': 'Point',
-                  'coordinates': [-51.220083, 23.306483]
-                },
-                properties: {
-                  storeId: '0001',
-                  icon: 'shop'
-                }
-              }
-            ]
+          'features': stores,
         }
       });
       map.addLayer({
